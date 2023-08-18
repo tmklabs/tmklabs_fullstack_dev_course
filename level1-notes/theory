@@ -1,0 +1,43 @@
+Terminology:
+
+------------------------------------CLIENT SIDE:------------------------------------
+The client-side refers to the user's web browser or client device, such as a computer, smartphone, or tablet.
+
+Client-side technologies:
+typically involve HTML (Hypertext Markup Language) for structuring web content, CSS (Cascading Style Sheets) for styling and layout,
+and JavaScript for interactivity and dynamic behavior.
+
+Execution:
+The client-side technologies are executed and run directly in the user's browser,
+enabling the browser to render and display web content, handle user interactions, and manage the user interface.
+
+Responsibilities:
+On the client-side, the main responsibilities include handling user interactions, performing validation and form submissions,
+rendering and updating the user interface dynamically, making asynchronous requests to the server,
+and manipulating the Document Object Model (DOM) to modify web page content.
+
+------------------------------------SERVER SIDE------------------------------------
+The server-side refers to the web server, which is a computer or system that hosts and delivers web applications or websites.
+Clinet -> Server -> Database
+Client <- Server <- Database
+
+Technologies:
+Server-side technologies often involve server-side programming languages, such as Node.js, Python, PHP, Ruby,
+Java, or .NET, and databases for STORING AND MANAGING DATA.
+
+Execution:
+Server-side code runs on the web server, processing requests from clients, performing data processing and calculations,
+interacting with databases, and generating dynamic content to be sent back to the client.
+
+Responsibilities:
+On the server-side, the main responsibilities include handling user requests, processing and storing data,
+implementing business logic, authentication (verifying the user eg: steve - user of tmklabs) and authorization
+(checking access eg: steve - accountant ),
+interacting with external services or APIs, and generating HTML, JSON, or other formats to be sent back to the client.
+
+Communication:
+The client and server communicate with each other over the internet using standard protocols (rules) like HTTP(S).
+The client sends requests to the server, and the server responds with the requested data or performs actions based on the received requests.
+
+Client-Server Model:
+The client-side handles the user interface and interactions, while the server-side manages the backend logic and data processing.
