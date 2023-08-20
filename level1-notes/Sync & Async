@@ -1,0 +1,108 @@
+CORE:
+
+the term "core" typically refers to a central processing unit (CPU) core.
+A CPU core is a physical processing unit within a computer's CPU that is capable 
+of executing instructions and performing calculations.
+
+Modern CPUs often consist of multiple cores, allowing for parallel processing and 
+improved performance. Each core within a CPU can independently execute instructions, 
+allowing for multiple tasks or threads to be processed simultaneously.
+
+Having multiple CPU cores enables concurrent execution of tasks, which can improve 
+the overall performance and responsiveness of a computer system. Tasks can be distributed 
+across different cores, allowing for efficient multitasking and parallel execution of computations.
+
+For example, a quad-core CPU has four separate CPU cores,
+ while an octa-core CPU has eight cores. Each core operates independently and can handle its
+  own set of instructions, contributing to the overall processing power of the CPU.
+
+The presence of multiple CPU cores enables better utilization of system resources and 
+facilitates faster and more efficient execution of software, including JavaScript code. 
+However, it's important to note that JavaScript, as a single-threaded language, runs 
+within a single CPU core, regardless of how many cores are available in the hardware.
+
+Javascript is a single-threaded language:
+
+JavaScript is indeed single-threaded. JavaScript in web browsers and Node.js 
+operates using a single execution thread. This means that JavaScript code is 
+executed sequentially, one instruction at a time, in a single call stack.
+
+In a single-threaded environment, only one task can be executed at any given moment. 
+If a task takes a long time to complete, it can block the execution of subsequent 
+tasks, causing delays and potentially making the application unresponsive.
+
+However, it's important to note that JavaScript environments, such as web browsers, 
+provide mechanisms to handle asynchronous operations effectively, even though the 
+JavaScript language itself is single-threaded. For example, JavaScript supports 
+asynchronous operations through techniques like callbacks, Promises, and async/await syntax.
+
+
+
+Asynchronous operations, such as making network requests, reading and writing files, 
+and timers, can be managed using non-blocking mechanisms. These mechanisms allow 
+JavaScript to initiate an asynchronous operation and continue executing other code 
+without waiting for the operation to complete. Once the asynchronous operation finishes, 
+a callback function or a Promise is used to handle the result.
+
+By leveraging these asynchronous patterns and APIs, JavaScript can handle I/O operations 
+efficiently without blocking the main execution thread. This enables JavaScript to 
+provide responsiveness and handle concurrent tasks effectively, even though the 
+language itself is single-threaded.
+
+Examples:
+Single Threaded Environment:
+
+var a = 3
+if (a%2==0){
+a is event
+}
+else{
+a is odd
+}
+
+Asynchronous Operations:
+JS is single-threaded but we can execute asynchronous operations using asynchronous patterns 
+like the following example with JavaScript that can handle I/O operations efficiently without 
+blocking the main execution thread and waiting for the result to complete before executing the
+ next asynchronous operation.
+
+Asynchronous programming is a technique that enables your program to start a potentially 
+long-running task and still be able to be responsive to other events while that task runs, 
+rather than having to wait until that task has finished. Once that task has finished, 
+your program is presented with the result.
+
+Example:
+console.log("Start");
+
+setTimeout(() => {
+console.log("Async operation completed after 2 seconds");
+}, 2000);
+
+console.log("End");
+
+OUtput:
+Start
+End
+Async operation completed after 2 seconds
+
+
+one more example:
+let fs = require("fs");
+
+const fileIsRead = (err, fileContent) => {
+  let result = addition(parseInt(fileContent));
+  console.log("file reseult is", result);
+};
+
+console.log("result 1", addition(100));
+fs.readFile("./file.txt", "utf-8", fileIsRead);
+console.log("hey hey");
+
+
+file.txt:
+5
+
+Output:
+result 1 5050
+hey hey
+file reseult is 15

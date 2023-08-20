@@ -26,7 +26,7 @@ addition(100); */
 
 // Solution:
 
-let fs = require("fs");
+/* let fs = require("fs");
 
 const fileIsRead = (err, fileContent) => {
   let result = addition(parseInt(fileContent));
@@ -36,3 +36,41 @@ const fileIsRead = (err, fileContent) => {
 console.log("result 1", addition(100));
 fs.readFile("./file.txt", "utf-8", fileIsRead);
 console.log("hey hey");
+ */
+
+const fs = require("fs").promises;
+
+// Function to read a file using a Promise
+function readFileAsync(filePath) {
+  return fs.readFile(filePath, "utf-8");
+}
+
+// Function to write to a file using a Promise
+function writeFileAsync(filePath, data) {
+  return fs.writeFile(filePath, data);
+}
+
+console.log("result 1", addition(100));
+readFileAsync("./file.txt")
+  .then((fileContent) => {
+    let result = addition(parseInt(fileContent));
+    console.log("file result is", result);
+    return result;
+  })
+  .then((result) => {
+    console.log("Result written to result.txt");
+    return writeFileAsync("./result.txt", result.toString());
+  })
+  .then(() => {
+    return readFileAsync("./result.txt");
+  })
+  .then((readContent) => {
+    console.log("Read result:", readContent);
+  })
+  .catch((error) => {
+    console.error("Error:", error);
+  });
+
+console.log("hey hey");
+
+// file.txt contains: 5

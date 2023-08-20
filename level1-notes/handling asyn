@@ -1,0 +1,192 @@
+The Need for Asynchronous Programming
+Before we dive into the specifics of these APIs, let's understand why
+asynchronous programming is crucial in JavaScript. Consider scenarios
+like making network requests, reading files, or handling user interactions.
+These tasks may take an unpredictable amount of time to complete,
+causing the application to freeze if performed synchronously.
+
+Asynchronous programming enables JavaScript to initiate these tasks and continue executing other code without waiting for their completion.
+
+Native JavaScript API:
+
+1. using callback functions:
+   1.Callback functions are a traditional way to handle asynchronous tasks. A callback function is passed as an argument to another function and is executed when the asynchronous task is complete.
+
+Example:
+
+```
+let fs = require("fs");
+
+const fileIsRead = (err, fileContent) => {
+  let result = addition(parseInt(fileContent));
+  console.log("file reseult is", result);
+};
+
+console.log("result 1", addition(100));
+fs.readFile("./file.txt", "utf-8", fileIsRead);
+console.log("hey hey");
+
+file.txt:
+5
+
+Result:
+
+Output:
+result 1 5050
+hey hey
+file reseult is 15
+
+```
+
+However, nested callbacks can lead to callback hell, making code hard to read and maintain.
+
+Here's how this example demonstrates callback hell:
+
+```
+let fs = require("fs");
+
+const fileIsRead = (err, fileContent) => {
+  if (err) {
+    console.error("Error reading file:", err);
+    return;
+  }
+
+  let result = addition(parseInt(fileContent));
+  console.log("file result is", result);
+
+  // Nested callback to write the result to another file
+  fs.writeFile("./result.txt", result.toString(), (writeErr) => {
+    if (writeErr) {
+      console.error("Error writing result:", writeErr);
+      return;
+    }
+    console.log("Result written to result.txt");
+
+    // Nested callback to read the written file
+    fs.readFile("./result.txt", "utf-8", (readErr, readContent) => {
+      if (readErr) {
+        console.error("Error reading result:", readErr);
+        return;
+      }
+      console.log("Read result:", readContent);
+    });
+  });
+};
+
+console.log("result 1", addition(100));
+
+// Nested callback to read another file
+fs.readFile("./file.txt", "utf-8", fileIsRead);
+
+console.log("hey hey");
+
+// file.txt contains: 5
+```
+
+Deep Nesting: Asynchronous operations and their respective callbacks are deeply nested within one another.
+For instance:
+
+The callback for reading "file.txt" contains the logic for reading, processing, writing, and reading another file.
+This leads to a deep nesting structure.
+Complex Flow: The code's flow becomes complex and harder to follow due to the multiple levels of nesting.
+Each nested callback introduces a new layer of indentation and context, making it challenging to understand
+the overall logic.
+
+Error Handling: Error handling within callback hell can be especially challenging. You have to handle errors
+at each level of nesting, which increases the likelihood of overlooking errors or writing error-handling
+code that is difficult to manage.
+
+Maintenance Difficulty: As the codebase grows and evolves, maintaining and extending callback hell becomes
+increasingly difficult. Making changes or adding more asynchronous operations can lead to even deeper
+nesting, exacerbating the problem.
+
+Callback hell is a term used to describe such deeply nested callback structures, which are not only hard to
+read and understand but also prone to errors and challenging to maintain. It's one of the reasons why Promises,
+async/await, and other asynchronous patterns were introduced in JavaScript to provide more structured
+and readable ways of dealing with asynchronous code.
+
+2. A Promise in JavaScript is like a promise you make in real life. It represents something that might
+3. or might not happen in the future. It has two possible outcomes: it can be kept (resolved) or
+4. broken (rejected). Promises are used to handle tasks that take time to complete, such as
+5. reading files, making network requests, or waiting for user input. They provide a more
+6. organized way to deal with asynchronous code and manage the results or errors that
+7. come from these tasks.
+
+Example using Promises to Refactor (improving internal code by making many small changes
+without altering the code's external behavior) Callback Hell:
+
+```
+const fs = require("fs").promises;
+
+// Function to read a file using a Promise
+function readFileAsync(filePath) {
+  return fs.readFile(filePath, "utf-8");
+}
+
+// Function to write to a file using a Promise
+function writeFileAsync(filePath, data) {
+  return fs.writeFile(filePath, data);
+}
+
+console.log("result 1", addition(100));
+
+readFileAsync("./file.txt")
+  .then(fileContent => {
+    let result = addition(parseInt(fileContent));
+    console.log("file result is", result);
+    return result;
+  })
+  .then(result => {
+    console.log("Result written to result.txt");
+    return writeFileAsync("./result.txt", result.toString());
+  })
+  .then(() => {
+    return readFileAsync("./result.txt");
+  })
+  .then(readContent => {
+    console.log("Read result:", readContent);
+  })
+  .catch(error => {
+    console.error("Error:", error);
+  });
+
+console.log("hey hey");
+
+// file.txt contains: 5
+
+```
+
+ONE more example:
+
+```
+function fetchDataWithCallback(url, callback) {
+  // Make an HTTP GET request using the fetch API
+  fetch(url)
+    .then(response => {
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+      return response.json(); // Parse the response body as JSON
+    })
+    .then(data => {
+      // Call the callback with the fetched data
+      callback(null, data);
+    })
+    .catch(error => {
+      // Call the callback with an error if one occurs
+      callback(error, null);
+    });
+}
+
+// Usage example:
+const apiUrl = "https://jsonplaceholder.typicode.com/posts/1";
+
+fetchDataWithCallback(apiUrl, (error, data) => {
+  if (error) {
+    console.error("Error:", error);
+  } else {
+    console.log("Data:", data);
+  }
+});
+
+```
