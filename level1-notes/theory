@@ -41,3 +41,6 @@ The client sends requests to the server, and the server responds with the reques
 
 Client-Server Model:
 The client-side handles the user interface and interactions, while the server-side manages the backend logic and data processing.
+
+Software in brief:
+https://medium.com/p/b5b1ccf72d7c
