@@ -87,6 +87,26 @@ Async operation completed after 2 seconds
 
 
 one more example:
+
+// Define a function that takes a callback as an argument
+function doSomethingAsync(callback) {
+  setTimeout(function () {
+    console.log("Task completed!");
+    // Call the callback function
+    callback();
+  }, 2000); // Simulate an asynchronous operation that takes 2 seconds
+}
+
+// Define a callback function
+function callbackFunction() {
+  console.log("Callback function called!");
+}
+
+// Call the main function and pass the callback
+doSomethingAsync(callbackFunction);
+
+
+
 let fs = require("fs");
 
 const fileIsRead = (err, fileContent) => {

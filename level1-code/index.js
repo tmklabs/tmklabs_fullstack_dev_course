@@ -40,6 +40,38 @@ console.log("hey hey");
 
 const fs = require("fs").promises;
 
+// Function to perform addition synchronously
+function addition(n) {
+  let sum = 0;
+  while (n > 0) {
+    sum = sum + n;
+    n--;
+  }
+  return sum;
+}
+
+// Function to read a file using Promises
+function readFileWithPromise(filePath) {
+  return fs.readFile(filePath, "utf-8");
+}
+
+// Usage of Promises
+console.log("Result 1", addition(100));
+
+readFileWithPromise("./file.txt")
+  .then((fileContent) => {
+    const result = addition(parseInt(fileContent));
+    console.log("File result is", result);
+  })
+  .catch((error) => {
+    console.error("Error:", error);
+  });
+
+console.log("Hey hey");
+
+/* 
+const fs = require("fs").promises;
+
 // Function to read a file using a Promise
 function readFileAsync(filePath) {
   return fs.readFile(filePath, "utf-8");
@@ -72,5 +104,5 @@ readFileAsync("./file.txt")
   });
 
 console.log("hey hey");
-
+ */
 // file.txt contains: 5

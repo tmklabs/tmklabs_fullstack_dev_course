@@ -38,7 +38,8 @@ file reseult is 15
 
 ```
 
-However, nested callbacks can lead to callback hell, making code hard to read and maintain.
+However, nested callbacks can lead to callback hell, 
+making code hard to read and maintain.
 
 Here's how this example demonstrates callback hell:
 

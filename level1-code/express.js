@@ -45,8 +45,10 @@ app.get("/data-promise", (req, res) => {
       res.json(data);
     })
     .catch((error) => {
-      res.status(500).json({ error: "Error fetching data with Promise" });
+      res.status(500).json({ error: error });
     });
+
+  console.log("api request ogin gon ...");
 });
 
 // Function to fetch data with a Promise
