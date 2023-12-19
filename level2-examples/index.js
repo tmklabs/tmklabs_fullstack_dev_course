@@ -33,14 +33,11 @@ const addition = (number) => {
 
 // taking value from headers
 app.post("/multipleparams", (req, res) => {
-  console.log("body is", req.body);
   let lastnumber = req.body.lastnumber;
-  if (lastnumber < 100) {
-    let result = "addition " + addition(lastnumber);
-    res.send(result);
-  } else {
-    res.status(411).send("number is > 100");
-  }
+  let resultObject = {
+    sum: addition(lastnumber),
+  };
+  res.send(resultObject);
 });
 
 // Starting the server
