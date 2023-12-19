@@ -1,3 +1,14 @@
+/* 
+CHAINED METHOD CALL
+let sentence = " Hello, World! ";
+
+// Chained method calls
+let trimmedAndLowered = sentence.trim().toLowerCase();
+
+console.log(trimmedAndLowered); // Output: "hello, world!"
+
+*/
+
 const express = require("express");
 const bodyParser = require("body-parser");
 const app = express();
@@ -23,8 +34,13 @@ const addition = (number) => {
 // taking value from headers
 app.post("/multipleparams", (req, res) => {
   console.log("body is", req.body);
-  let result = "addition " + addition(req.body.lastnumber);
-  res.send(result);
+  let lastnumber = req.body.lastnumber;
+  if (lastnumber < 100) {
+    let result = "addition " + addition(lastnumber);
+    res.send(result);
+  } else {
+    res.status(411).send("number is > 100");
+  }
 });
 
 // Starting the server
