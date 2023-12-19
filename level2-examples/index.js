@@ -32,8 +32,8 @@ const addition = (number) => {
 };
 
 // taking value from body
-app.post("/multipleparams", (req, res) => {
-  let lastnumber = req.body.lastnumber;
+app.get("/multipleparams", (req, res) => {
+  let lastnumber = req.query.lastnumber;
   let resultObject = {
     sum: addition(lastnumber),
   };
