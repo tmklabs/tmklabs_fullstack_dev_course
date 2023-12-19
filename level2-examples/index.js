@@ -1,13 +1,15 @@
 const express = require("express");
+const bodyParser = require("body-parser");
 const app = express();
-
+// explaining body to pass values
 const middleware = (req, res, next) => {
-  console.log("from inside middleware" + req.headers.lastnumber);
+  console.log("from inside middleware");
   next();
 };
 
 //register the middleware
 app.use(middleware);
+app.use(bodyParser.json()); // extracts the body before passing it the handler
 const port = 3000;
 
 let sum = 0;
@@ -20,8 +22,8 @@ const addition = (number) => {
 
 // taking value from headers
 app.post("/multipleparams", (req, res) => {
-  console.log("headers are", req.headers);
-  let result = "addition idds " + addition(req.headers.lastnumber);
+  console.log("body is", req.body);
+  let result = "addition " + addition(req.body.lastnumber);
   res.send(result);
 });
 
