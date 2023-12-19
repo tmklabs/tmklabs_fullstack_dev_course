@@ -56,19 +56,26 @@ const addition = (number) => {
 };
 
 // Defining a route on the app
-app.get("/", (req, res) => {
-  let result = "addition is " + addition(req.query.lastNumber);
-  res.send(result);
-});
+// app.get("/", (req, res) => {
+//   let result = "addition is " + addition(req.query.lastNumber);
+//   res.send(result);
+// });
 
-app.get("/multipleparams", (req, res) => {
-  let result =
-    "addition is " +
-    addition(req.query.lastNumber) +
-    "seond param is" +
-    req.query.a +
-    "third param is" +
-    req.query.b;
+// app.get("/multipleparams", (req, res) => {
+//   let result =
+//     "addition is " +
+//     addition(req.query.lastNumber) +
+//     "seond param is" +
+//     req.query.a +
+//     "third param is" +
+//     req.query.b;
+//   res.send(result);
+// });
+
+// taking value from headers
+app.post("/multipleparams", (req, res) => {
+  console.log("headers are", req.headers);
+  let result = "addition idds " + addition(req.headers.lastnumber);
   res.send(result);
 });
 
