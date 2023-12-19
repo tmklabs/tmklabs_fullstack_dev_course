@@ -31,13 +31,17 @@ const addition = (number) => {
   return sum;
 };
 
-// taking value from headers
+// taking value from body
 app.post("/multipleparams", (req, res) => {
   let lastnumber = req.body.lastnumber;
   let resultObject = {
     sum: addition(lastnumber),
   };
   res.send(resultObject);
+});
+
+app.get("/", (req, res) => {
+  res.sendFile(__dirname + "/index.html");
 });
 
 // Starting the server
